@@ -434,6 +434,11 @@ sed -i 's|ServerTokens Full|ServerTokens Prod|' /usr/local/apache/conf/extra/htt
 systemctl daemon-reload 
 systemctl restart php-fpm.service 
 systemctl restart httpd.service
+firewall-cmd --permanent --zone=public --add-port=3306/tcp --permanent;
+firewall-cmd --permanent --query-port=3306/tcp;
+firewall-cmd --permanent --zone=public --add-port=80/tcp --permanent;
+firewall-cmd --permanent --query-port=80/tcp;
+firewall-cmd --reload;
 # systemctl restart nginx.service
 sleep 5
 rm -rf $sourceinstall
